@@ -72,32 +72,35 @@ public class LinkedIntList implements IntList{
         this.first = this.first.getNextCell();
     }
 
-    public void add(int n,int pos){
-
-        if(pos < 1 ){
-            this.add(n);
-
-        } else {
-            if(pos> length()){
-                pos = length();
-            }
-            Cell cell = this.getFirst();
-            for (int i = 1; i <= pos-1; i++) {
-                cell = cell.getNextCell();
-            }
-            cell.setNextCell(new Cell(cell.getNextCell(),n));
+    public void add(int n, int pos){
+        if(pos <= 1){
+            add(n);
+        }else if(pos > length()){
+            pos = length();
+        }else{
+            Cell newCell = getCellAtPosition(pos - 1);
+            newCell.setNextCell(new Cell(newCell.getNextCell(),n));
         }
     }
 
-    public void remove(int pos) {
-        if(pos < 1 ||  pos > length()){
-            throw new NoSuchElementException();
+    public void remove(int pos) throws NoSuchElementException {
+        if(pos < 1 || pos > length()){
+            throw new NoSuchElementException("You can't remove something that isn't there.");
         }
-        Cell cell = this.getFirst();
-        for (int i = 1; i < pos-1 ; i++) {
-            cell = cell.getNextCell();
+        if(pos == 1){
+            remove();
+        }else{
+            Cell newCell = getCellAtPosition(pos-1);
+            newCell.setNextCell(newCell.getNextCell().getNextCell());
         }
-        cell.setNextCell(cell.getNextCell().getNextCell());
+    }
+
+    private Cell getCellAtPosition(int pos) {
+        Cell newCell = first;
+        for (int i = 1; i < pos; i++) {
+            newCell = newCell.getNextCell();
+        }
+        return newCell;
     }
 
 }

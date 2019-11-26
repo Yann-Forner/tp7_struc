@@ -24,10 +24,10 @@ public class TryList {
         System.out.println(myList.equals(myList2));
 
         printIntList(myList3);
-        myList3.add(7,4);
+        myList3.add(7,2);
         printIntList(myList3);
         System.out.println(myList3.length());
-        myList3.remove(2);
+        myList3.remove(1);
         printIntList(myList3);
     }
 
