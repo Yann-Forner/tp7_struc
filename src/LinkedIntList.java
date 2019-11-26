@@ -46,7 +46,7 @@ public class LinkedIntList implements IntList{
 
     @Override
     public boolean equals(IntList i) {
-        if (this.getTail().isEmpty())return this.getHead() == i.getHead();
+        if (this.getTail().isEmpty() || i.getTail().isEmpty())return this.getHead() == i.getHead();
         return this.first.getDataCell() == i.getHead()
                 && this.getTail().equals(i.getTail());
     }
@@ -71,24 +71,20 @@ public class LinkedIntList implements IntList{
     }
 
     public void add(int n,int pos){
-        LinkedIntList prec = this.get(pos);
-        LinkedIntList next = this.get(pos+1);
-        TryList.printIntList(prec);
-        System.out.println("LOL");
-        TryList.printIntList(next);
-        Cell cur = new Cell(next.getFirst(),n);
-        prec.getFirst().setNextCell(cur);
-    }
-    public LinkedIntList get(int pos){
-        if(pos> length()){
-            return null;
+
+        if(pos < 1 ){
+            this.add(n);
+
+        } else {
+            if(pos>=length()){
+                pos = length();
+            }
+            Cell cell = this.getFirst();
+            for (int i = 1; i <= pos-1; i++) {
+                cell = cell.getNextCell();
+            }
+            cell.setNextCell(new Cell(cell.getNextCell(),n));
         }
-        int i =0;
-        LinkedIntList link = this;
-        while (pos!=i){
-            link = (LinkedIntList) this.getTail();
-            ++i;
-        }
-        return link;
     }
+
 }

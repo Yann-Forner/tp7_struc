@@ -24,7 +24,7 @@ public class TryList {
         System.out.println(myList.equals(myList2));
 
         printIntList(myList3);
-        myList3.add(7,1);
+        myList3.add(7,4);
         printIntList(myList3);
         System.out.println(myList3.length());
     }
