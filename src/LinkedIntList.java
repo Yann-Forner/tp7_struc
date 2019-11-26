@@ -48,11 +48,14 @@ public class LinkedIntList implements IntList{
 
     @Override
     public boolean equals(IntList i) {
-        if (this.getTail().isEmpty() || i.getTail().isEmpty())return this.getHead() == i.getHead();
-        return this.first.getDataCell() == i.getHead()
+        if (isOnlyOneEmpty(i))return false;
+        if(this.getTail().isEmpty() && i.getTail().isEmpty())return true;
+        return this.getHead() == i.getHead()
                 && this.getTail().equals(i.getTail());
     }
-
+    public boolean isOnlyOneEmpty(IntList i){
+        return (i.getTail().isEmpty() && !this.getTail().isEmpty()) || (!i.getTail().isEmpty() && this.getTail().isEmpty());
+    }
     @Override
     public int sum() {
         if (this.first==null)return 0;
@@ -76,7 +79,11 @@ public class LinkedIntList implements IntList{
         if(pos <= 1){
             add(n);
         }else if(pos > length()){
-            pos = length();
+            Cell newCell = this.first;
+            for (int i = 1; i < length(); i++) {
+                newCell = newCell.getNextCell();
+            }
+            newCell.setNextCell(new Cell(null,n));
         }else{
             Cell newCell = getCellAtPosition(pos - 1);
             newCell.setNextCell(new Cell(newCell.getNextCell(),n));
