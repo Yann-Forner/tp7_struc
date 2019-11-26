@@ -27,6 +27,8 @@ public class TryList {
         myList3.add(7,4);
         printIntList(myList3);
         System.out.println(myList3.length());
+        myList3.remove(2);
+        printIntList(myList3);
     }
 
     public static void printIntList(LinkedIntList l) {

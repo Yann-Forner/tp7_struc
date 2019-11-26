@@ -1,3 +1,5 @@
+import java.util.NoSuchElementException;
+
 public class LinkedIntList implements IntList{
     // variables d’instance
     private Cell first;
@@ -76,7 +78,7 @@ public class LinkedIntList implements IntList{
             this.add(n);
 
         } else {
-            if(pos>=length()){
+            if(pos> length()){
                 pos = length();
             }
             Cell cell = this.getFirst();
@@ -85,6 +87,17 @@ public class LinkedIntList implements IntList{
             }
             cell.setNextCell(new Cell(cell.getNextCell(),n));
         }
+    }
+
+    public void remove(int pos) {
+        if(pos < 1 ||  pos > length()){
+            throw new NoSuchElementException();
+        }
+        Cell cell = this.getFirst();
+        for (int i = 1; i < pos-1 ; i++) {
+            cell = cell.getNextCell();
+        }
+        cell.setNextCell(cell.getNextCell().getNextCell());
     }
 
 }
